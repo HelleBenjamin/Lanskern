@@ -1,0 +1,8 @@
+kernel_asm.o
+kernel.o
+isodir/boot/LanskeriOS.bin
+boot.o
+OS/drivers.o
+OS/kernel
+OS/drivers.o
+OS/kernel

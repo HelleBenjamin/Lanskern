@@ -1,0 +1,9 @@
+{
+    "C_Cpp.dimInactiveRegions": false,
+    "files.associations": {
+        "kernel.h": "c",
+        "ata.h": "c",
+        "libstd.h": "c",
+        "disk.h": "c"
+    }
+}
