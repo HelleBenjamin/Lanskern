@@ -5,6 +5,11 @@
 #include "../include/tinyasm.h"
 #include "../manuos/manuos.h"
 
+/* Lanskern (C) 2024-2025 Benjamin Helle. All rights reserved
+
+    This program is distributed under the GNU General Public License v3.0.
+*/
+
 void sleepMS(int ms) {
     for (int i = 0; i < ms; i++) {
         for (int j = 0; j < 100000; j++) {

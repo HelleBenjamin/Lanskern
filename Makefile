@@ -22,6 +22,7 @@ VGA_S = $(DRIVER_DIR)vga.c
 KEYBOARD_S = $(DRIVER_DIR)keyboard.c
 STDLIB_S = $(LIB_DIR)libstd.c
 MANUOS_S = $(OS_DIR)manuos.c
+DISK_S = $(DRIVER_DIR)disk.c
 
 LINK = link.ld
 
@@ -32,6 +33,7 @@ KEYBOARD_O = $(BUILD_DIR)keyboard.o
 STDLIB_O = $(BUILD_DIR)libstd.o
 LANSKERN = $(BUILD_DIR)Lanskern.bin
 MANUOS_O = $(BUILD_DIR)manuos.o
+DISK_O = $(BUILD_DIR)disk.o
 
 .PHONY: all clean
 
@@ -43,12 +45,13 @@ all:
 	$(C_COMPILER) -c $(KEYBOARD_S) -o $(KEYBOARD_O) $(C_FLAGS)
 	$(C_COMPILER) -c $(STDLIB_S) -o $(STDLIB_O) $(C_FLAGS)
 	$(C_COMPILER) -c $(MANUOS_S) -o $(MANUOS_O) $(C_FLAGS)
-	$(LINKER) $(LD_FLAGS) -T $(LINK) -o $(LANSKERN) $(ASM_O) $(KERNEL_O) $(VGA_O) $(KEYBOARD_O) $(STDLIB_O) $(MANUOS_O)
+	$(C_COMPILER) -c $(DISK_S) -o $(DISK_O) $(C_FLAGS)
+	$(LINKER) $(LD_FLAGS) -T $(LINK) -o $(LANSKERN) $(ASM_O) $(KERNEL_O) $(VGA_O) $(KEYBOARD_O) $(STDLIB_O) $(MANUOS_O) $(DISK_O)
 	mkdir -p isodir/boot/grub
 	cp build/Lanskern.bin isodir/boot/Lanskern.bin
 	cp grub.cfg isodir/boot/grub/grub.cfg
 	grub-mkrescue -o Lanskern.iso isodir
-	qemu-system-i386 -cdrom Lanskern.iso
+	qemu-system-i386 -hda Lanskern.iso
 
 clean:
 	rm -rf build

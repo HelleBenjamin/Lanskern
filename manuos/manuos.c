@@ -2,6 +2,7 @@
 #include "manuos.h"
 #include "../include/libstd.h"
 #include "../include/vga.h"
+#include "../include/disk.h"
 
 unsigned int cRow = 0;
 uint8_t taskbarColor;
@@ -39,12 +40,13 @@ void terminal() {
         nl();
         if (strcmp(prompt, 0) == 0) {
         } else if (strcmp(prompt, "version") == 0) {
-            prints("Copyright (C) 2024 Benjamin H. All rights reserved.");
+            prints("Copyright (C) 2024 - 2025 Benjamin Helle All rights reserved.");
             nl();
             prints("OS: " OS_VERSION);
             nl();
             prints("KERNEL: " KERNEL_VERSION);
             nl();
+            printf("Username: %s\n", username);
         } else if (strcmp(prompt, "help") == 0) {
             prints(TERMINAL_HELP_MSG);
             nl();
@@ -89,6 +91,12 @@ void terminal() {
             char c;
             sysreade32(c,1,1);
             background(c);
+        } else if (strcmp(prompt, "test") == 0) {
+            char diskbuf[512];
+            ide_read_sector(0, diskbuf);
+            for (int i = 0; i < 512; i++) {
+                printf("%d ", diskbuf[i]);
+            }
         } else if (strcmp(prompt, "exit") == 0) {
             break;
         }
