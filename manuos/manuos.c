@@ -93,10 +93,16 @@ void terminal() {
             background(c);
         } else if (strcmp(prompt, "test") == 0) {
             char diskbuf[512];
-            ide_read_sector(0, diskbuf);
+            ide_read_sector(90, diskbuf);
             for (int i = 0; i < 512; i++) {
-                printf("%d ", diskbuf[i]);
+                printf("%x ", diskbuf[i]);
             }
+        } else if (strcmp(prompt, "test2") == 0) {
+            char diskbuf2[512];
+            for (int i = 0; i < 512; i++) {
+                diskbuf2[i] = i;
+            }
+            ide_write_sector(90, diskbuf2);
         } else if (strcmp(prompt, "exit") == 0) {
             break;
         }

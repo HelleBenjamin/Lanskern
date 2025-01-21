@@ -111,7 +111,15 @@ void printf(const char *format, ...) {
                 }
                 case 'x': {
                     unsigned int num = va_arg(args, unsigned int);
-                    printi(num);
+                    char buf[10];
+                    buf[0] = '0';
+                    buf[1] = 'x';
+                    for (int i = 8; i > 1; i--) {
+                        buf[i] = "0123456789abcdef"[(num & 0xf)];
+                        num >>= 4;
+                    }
+                    buf[9] = '\0';
+                    prints(buf);
                     break;
                 }
                 default:

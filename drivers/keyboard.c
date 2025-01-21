@@ -1,5 +1,7 @@
 #include "../include/keyboard.h"
 #include "../include/kernel.h"
+#include "../include/libstd.h"
+#include "../include/interrupt.h"
 
 static char scan_code_to_ascii[128] = {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8', /* 9 */
@@ -80,6 +82,7 @@ static char scan_code_to_shifted_ascii[128] = {
 
 
 void keyboard_init(void) {
+    // TODO add keyboard to PIC
     return;
 }
 

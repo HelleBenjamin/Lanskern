@@ -4,6 +4,7 @@
         "kernel.h": "c",
         "ata.h": "c",
         "libstd.h": "c",
-        "disk.h": "c"
+        "disk.h": "c",
+        "idt.h": "c"
     }
 }

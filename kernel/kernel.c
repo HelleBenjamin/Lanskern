@@ -4,6 +4,8 @@
 #include "../include/keyboard.h"
 #include "../include/tinyasm.h"
 #include "../manuos/manuos.h"
+#include "../include/disk.h"
+#include "../include/interrupt.h"
 
 /* Lanskern (C) 2024-2025 Benjamin Helle. All rights reserved
 
@@ -45,9 +47,8 @@ int geti() {
 }
 
 void minimal_terminal() {
-    clear();
-    prints("Kernel Mode");
-    newline();
+    //clear();
+    prints("Kernel Terminal\n");
     char buf[20] = {0};
     while(1){
         syswrite32(">", 1);
@@ -68,6 +69,8 @@ void minimal_terminal() {
             restart();
         } else if (strcmp(buf, "os") == 0){
             os_main();    
+        } else if (strcmp(buf, "idt") == 0) {
+            idt_init();
         }
         newline();
     }
@@ -87,6 +90,7 @@ void restart() {
 }
 
 void kernel_main(void) {
+    idt_init();
     video_init();
     os_main();
     minimal_terminal();
